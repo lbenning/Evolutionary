@@ -1,4 +1,4 @@
 Evolutionary
 ============
 
-Iterative Prisoner's Dilemma simulation
+A collection of simulations using evolutionary algorithms.
