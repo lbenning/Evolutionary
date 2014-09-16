@@ -6,7 +6,7 @@ import sys
 
 '''
 Collection of 4 different genetic algorithms to solve TSP - 
-Each using either PMX or Hald recombination and ranking or 
+Each using either PMX or Half recombination and ranking or 
 roulette selection, yielding a total of 4 combinations
 '''
 
