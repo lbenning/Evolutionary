@@ -4,6 +4,12 @@ import numpy as np
 from tools import *
 import sys
 
+'''
+Collection of 4 different genetic algorithms to solve TSP - 
+Each using either PMX or Hald recombination and ranking or 
+roulette selection, yielding a total of 4 combinations
+'''
+
 # Initialize the population, a collection of paths
 def initPopulation(n,m):
 	indiv = []
@@ -118,10 +124,8 @@ def genetic(points, bound, inter, recFlag, selFlag):
 	parentCount = int(POP_SIZE*RECOMB_RATE)
 	#  Simulation
 	best = float(-1.0)
-	topPath = []
 	data = []
 	while (True):
-
 		# Fitness Measurements
 		fitnessScores = np.zeros((POP_SIZE,1))
 		scoreMap = {}
@@ -135,8 +139,6 @@ def genetic(points, bound, inter, recFlag, selFlag):
 			if (val in inter):
 				data.append(1.0/best)
 			if (val >= bound):
-				if (not recFlag and selFlag):
-					print topPath
 				return data
 			mRate = degrade(val)
 		fitnessScores = np.flipud(np.sort(fitnessScores,axis=0))

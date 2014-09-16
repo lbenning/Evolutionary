@@ -1,6 +1,12 @@
 import matplotlib.pyplot as plt
 from tools import errorBars
 
+'''
+Plots resulting path lengths found over time by the genetic algorithms 
+and parametric optimizers
+'''
+
+# Plot results : Path Length vs. Number of Evaluations
 def graph(pgtr,pgrr,hgr,hgrr,rr,sr,intervals):
 
 	pg = errorBars(pgtr,intervals)
@@ -26,9 +32,8 @@ def graph(pgtr,pgrr,hgr,hgrr,rr,sr,intervals):
 
 	plt.ylabel('Path Length')
 	plt.xlabel('Evaluations')
-	plt.title('Travelling Salesman Path Lengths - DataSet 1')
+	plt.title('Travelling Salesman Path Lengths')
 
-	
 	for x in range(len(pg)):
 		plt.errorbar(intervals[x], pgcoll[x], yerr=pg[x], linestyle="None", marker="None", color="red")
 		plt.errorbar(intervals[x], prcoll[x], yerr=pr[x], linestyle="None", marker="None", color="blue")
@@ -37,17 +42,9 @@ def graph(pgtr,pgrr,hgr,hgrr,rr,sr,intervals):
 		plt.errorbar(intervals[x], stcoll[x], yerr=st[x], linestyle="None", marker="None", color="black")
 		plt.errorbar(intervals[x], racoll[x], yerr=ra[x], linestyle="None", marker="None", color="orange")
 
-
-	print pgcoll[len(pgcoll)-1]
-	print prcoll[len(prcoll)-1]
-	print hgcoll[len(hgcoll)-1]
-	print hrcoll[len(hrcoll)-1]
-	print stcoll[len(stcoll)-1]
-	print racoll[len(racoll)-1]
-
-
 	plt.show()
 
+# Average together path scores of the same algorithm
 def collapse(pgtr):
 	t = []
 	for x in range(len(pgtr[0])):

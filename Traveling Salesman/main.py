@@ -8,6 +8,16 @@ from plot import graph
 import sys
 from threading import Thread
 
+'''
+Main file for launching TSP Learner.
+Script requires 5 arguments:
+
+arg1 - File name containing list of 2d points
+arg2 - Number of simulations per algorithm
+arg3 - Evaluations per simulations
+arg4 - Number of times to record path length per simulation (exxcluding initial evaluation)
+'''
+
 global data
 global evaluations
 global intervals
@@ -85,11 +95,5 @@ def main(name,iterations,eva,count):
 
 	graph(pgtr,pgrr,hgr,hgrr,rr,sr,intervals)
 
-'''
-arg1 : Filename to read in list of 2d points
-arg2 : Number of iterations n > 0
-arg3 : Number of evaluations m > 0
-arg4 : Number of interval points to plot i > 0 (in addition to 1)
-'''
 if __name__ == '__main__':
     main(sys.argv[1],int(sys.argv[2]),int(sys.argv[3]),int(sys.argv[4]))

@@ -3,12 +3,19 @@ import random
 import numpy
 from tools import *
 
+'''
+Parametric Optimizers to search for optimal TSP solution. 
+Method 1: Stochastic Hill Climbing search
+Method 2: Random Search - Used as benchmark
+'''
+
 # Initialize the population, a collection of paths
 def createPath(m):
   n = numpy.arange(1,m+1)
   numpy.random.shuffle(n)
   return n
 
+# Perform a stochastic hill climbing search
 def stochClimb(points,bound,inter):
   p = len(points)
   # ctr for fitness func. eval.
@@ -59,7 +66,7 @@ def stochClimb(points,bound,inter):
         if (f > maxfit):
           maxfit = f
 
-
+# Perform a random search, used primarily for benchmarking
 def randSearch(points,bound,inter):
   p = len(points)
   scores = []
