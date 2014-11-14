@@ -2,7 +2,7 @@
 
 from gp import simulate
 from gp import randomSearch
-from threading import Thread
+import multiprocessing as mp
 from plot import graph
 import sys
 
@@ -11,25 +11,21 @@ Main script for execution of genetic program for
 symbolic regression.
 
 Written by Luke Benning
-Last Edited : 9/27/2014
+Last Edited : 11/14/2014
 '''
-
-global res
-global kingRes
-global randRes
 
 # Base GP simulation
 # Run single genetic simulation - tree height 5
 def runGenetic(data, eva, count):
-	res.append(simulate(data,eva,count,False))
+	return simulate(data,eva,count,False)
 
 # Run genetic - king of the hill - tree height 5
 def runGeneticKing(data,eva,count):
-	kingRes.append(simulate(data,eva,count,True))
+	return simulate(data,eva,count,True)
 
 # Run single random simulation
 def runRandom(data, eva, count):
-	randRes.append(randomSearch(data,eva,count))
+	return randomSearch(data,eva,count)
 
 # Retrieve 2d point data from file
 def getData(fileName):
@@ -52,15 +48,19 @@ def selectFirst(k):
 		trimmed.append(t[0])
 	return trimmed
 
-# Finds best equation
-def findBestEquation(r,s):
+# Finds best equation among the simulation results
+def findBestEquation(tradGeneticRes,kingGeneticRes,randomRes):
 	bestScore = -1.0
 	bestEqn = "None"
-	for x in r:
+	for x in tradGeneticRes:
 		if (x[0][len(x[0])-1] > bestScore):
 			bestScore = x[0][len(x[0])-1]
 			bestEqn = x[1]
-	for x in s:
+	for x in kingGeneticRes:
+		if (x[0][len(x[0])-1] > bestScore):
+			bestScore = x[0][len(x[0])-1]
+			bestEqn = x[1]
+	for x in randomRes:
 		if (x[0][len(x[0])-1] > bestScore):
 			bestScore = x[0][len(x[0])-1]
 			bestEqn = x[1]
@@ -69,12 +69,7 @@ def findBestEquation(r,s):
 # Initialize full genetic program simulation
 def main(filename, iterations, eva, count):
 
-	global res
-	res = []
-	global randRes
-	randRes = []
-	global kingRes
-	kingRes = []
+	print "Retrieving dataset..."
 
 	data = getData(filename)
 
@@ -83,20 +78,24 @@ def main(filename, iterations, eva, count):
 	for x in range(1,count+1):
 		intervals.append(x*(eva/count))
 
-	for x in range(iterations):
-		t = Thread(target=runGenetic,args=(data,eva,intervals))
-		t.start()
-		t.join()
-		s = Thread(target=runRandom,args=(data,eva,intervals))
-		s.start()
-		s.join()
-		k = Thread(target=runGeneticKing,args=(data,eva,intervals))
-		k.start()
-		k.join()
+	processPool = mp.Pool(processes=20)
+
+	print "Beginning simulations..."
+
+	geneticJobs = [processPool.apply_async(runGenetic,
+	 args=(data,eva,intervals)) for x in range (iterations)]
+	randomJobs = [processPool.apply_async(runRandom,
+	 args=(data,eva,intervals)) for x in range (iterations)]
+	kingJobs = [processPool.apply_async(runGeneticKing,
+	 args=(data,eva,intervals)) for x in range (iterations)]
+
+	res = [g.get() for g in geneticJobs]
+	randRes = [r.get() for r in randomJobs]
+	kingRes = [k.get() for k in kingJobs]
 
 	print "Simulation Complete"
 	print "Best Equation Found: "
-	print findBestEquation(res,kingRes)
+	print findBestEquation(res,kingRes,randRes)
 	
 	graph(selectFirst(res),selectFirst(randRes),selectFirst(kingRes),intervals)
 

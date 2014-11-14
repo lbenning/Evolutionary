@@ -26,9 +26,9 @@ def graph(genProg,randSearch,genKing,intervals):
 	plt.title('GP Symbolic Regression : Division - Noise')
 
 	for x in range(len(intervals)):
-		plt.errorbar(intervals[x], genColl[x], yerr=genBars[x]*25, linestyle="None", marker="None", color="red")
-		plt.errorbar(intervals[x], randColl[x], yerr=randBars[x]*25, linestyle="None", marker="None", color="blue")
-		plt.errorbar(intervals[x], kingColl[x], yerr=genKingBars[x]*25, linestyle="None", marker="None", color="green")
+		plt.errorbar(intervals[x], genColl[x], yerr=genBars[x], linestyle="None", marker="None", color="red")
+		plt.errorbar(intervals[x], randColl[x], yerr=randBars[x], linestyle="None", marker="None", color="blue")
+		plt.errorbar(intervals[x], kingColl[x], yerr=genKingBars[x], linestyle="None", marker="None", color="green")
 
 	plt.show()
 

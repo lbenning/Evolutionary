@@ -17,7 +17,7 @@ upperBound = 10.0
 
 # Operators
 binary = ["+","-","*","/"]
-unary = ["sqrt"]
+unary = ["sqrt,sin,cos,tan"]
 
 # Set an upper bound on the tree depth
 maxDepth = 5
@@ -56,10 +56,6 @@ class Node(object):
 
 # Probabilistically generates a binary tree representing
 # a mathematical formula with height at most <depthLeft>
-# Includes non-negativity constraint - if domain doesn't accept
-# negative values then the independent variable must be
-# squared (or applied to any even power), assuming the dataset 
-# has some negative values - this improves general performance
 def generateTree(depthLeft,nested):
   # Max depth exceeded - generation must terminate
   if (depthLeft <= 0):
