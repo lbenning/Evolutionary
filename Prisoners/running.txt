@@ -1,0 +1,24 @@
+Running Details:
+
+- Run javac Prisoners.java to produce the java class file by calling the Java compiler.
+- Then to run the simulation, there are 2 options:
+
+1. Run java Prisoners with the following 5 parameters:
+
+  * Population Size - Must be an integer greater than 1. This is the number
+  of individuals that will be in the population.
+
+  * Mutation Rate - Must be a value between 0 and 1. This is the probability that
+  an individual produced from crossover will be mutated.
+
+  * Generations - Must be an integer greater than 0. This is the number of generations that the simulation will run for.
+
+  * Recombination Rate - Must be a value between 0 and 1. This is the fraction
+  of the population that will be selected for crossover.
+
+  * Historical Length - This is the number of previous games an individual can
+  consider when determining which move to make, i.e. Cooperate or Defect.
+
+2. Run java Prisoners. This will run the simulation with the default parameters:
+  * Population Size = 10, Mutation Rate = 0.005, Generations = 50000, 
+  Recombination Rate = 0.8, Historical Length = 2.

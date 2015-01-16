@@ -1,5 +1,4 @@
 # Evolutionary
-============
 
 Evolutionary algorithms applied to various types of problems.
 
