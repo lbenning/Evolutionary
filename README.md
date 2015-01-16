@@ -12,7 +12,8 @@ Evolutionary algorithms applied to various types of problems.
 
 ## Running:
 
-* Details on how to run the evolutionary algorithms are in the respective folders.
+* Details on how to run the evolutionary algorithms are in running.txt file in
+the respective folders.
 
 ## License:
 
