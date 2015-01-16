@@ -5,9 +5,9 @@ from tools import *
 import sys
 
 '''
-Collection of 4 different genetic algorithms to solve TSP - 
-Each using either PMX or Half recombination and ranking or 
-roulette selection, yielding a total of 4 combinations
+Collection of 2 different genetic algorithms to solve TSP
+- GA 1 - Roulette Selection and PMX Crossover
+- GA 2 - Roulette Selection and Half+Reorder Crossover
 '''
 
 # Initialize the population, a collection of paths
@@ -111,7 +111,7 @@ def degrade(val):
 	return 0.50
 
 # Main simulation function
-def genetic(points, bound, inter, recFlag, selFlag):
+def genetic(points, bound, inter, recFlag):
 	# Global evaluation counter
 	val = 0
 	# Mutation rate - will be degraded
@@ -144,15 +144,10 @@ def genetic(points, bound, inter, recFlag, selFlag):
 		fitnessScores = np.flipud(np.sort(fitnessScores,axis=0))
 		par = np.zeros((parentCount,1),dtype=np.int)
 
-		# Selection
-		if (selFlag):	
-			for x in range(parentCount):
-				par[x][0] = scoreMap.get(fitnessScores[x][0])
-		else:
-			total = np.sum(fitnessScores)
-			for x in range(parentCount):
-				slot = random.uniform(0,total)
-				par[x][0] = scoreMap.get(roulette(fitnessScores,slot))
+		total = np.sum(fitnessScores)
+		for x in range(parentCount):
+			slot = random.uniform(0,total)
+			par[x][0] = scoreMap.get(roulette(fitnessScores,slot))
 
 		# Variation
 		children = []
