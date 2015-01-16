@@ -3,40 +3,26 @@ import math
 import numpy as np
 
 # Plots the simulation results of the algorithms
-def graph(genProg,randSearch,genKing,intervals):
-
-	logScale(genProg)
-	logScale(randSearch)
-	logScale(genKing)
+def graph(genProg,randSearch,intervals):
 
 	genColl = collapse(genProg)
 	randColl = collapse(randSearch)
-	kingColl = collapse(genKing)
 
 	genBars = errorBars(genProg,intervals)
 	randBars = errorBars(randSearch,intervals)
-	genKingBars = errorBars(genKing,intervals)
 
 	plt.plot(intervals,genColl,"red",
-		intervals,randColl,"blue",
-		intervals,kingColl,"green")
+		intervals,randColl,"blue")
 
 	plt.ylabel('Fitness (Base e)')
 	plt.xlabel('Evaluations')
-	plt.title('GP Symbolic Regression : Division - Noise')
+	plt.title('GP Symbolic Regression')
 
 	for x in range(len(intervals)):
-		plt.errorbar(intervals[x], genColl[x], yerr=genBars[x], linestyle="None", marker="None", color="red")
-		plt.errorbar(intervals[x], randColl[x], yerr=randBars[x], linestyle="None", marker="None", color="blue")
-		plt.errorbar(intervals[x], kingColl[x], yerr=genKingBars[x], linestyle="None", marker="None", color="green")
-
+		plt.errorbar(intervals[x], genColl[x], yerr=genBars[x], linestyle="None", marker="None", color="orange")
+		plt.errorbar(intervals[x], randColl[x], yerr=randBars[x], linestyle="None", marker="None", color="black")
+		
 	plt.show()
-
-# Logarithmically scales values
-def logScale(data):
-	for x in range(len(data)):
-		for y in range(len(data[x])):
-			data[x][y] = math.log(data[x][y])
 
 # Retrieve best results over multiple simulations
 # of each algorithm

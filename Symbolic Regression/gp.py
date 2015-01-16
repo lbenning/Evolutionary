@@ -47,7 +47,7 @@ def degradeMutation(eva):
 		return 0.02
 
 # Genetic programming simulation
-def simulate(data, eva, interv, king):
+def simulate(data, eva, interv):
 
 	# Constants
 	# Recombination rate
@@ -107,13 +107,3 @@ def simulate(data, eva, interv, king):
 		# Replace the poorest performing individuals
 		for x in range(len(pop)-len(children),len(pop)):
 			pop[scoreMap[fitnessScores[x]]] = children.pop()
-
-		if (king):
-			# King of the hill - Let the top performing individual
-			# replace a small portion of lower scoring individuals with
-			# it's genetic data, if it beats out all of them by at least
-			# a factor of 2.
-			if (fitnessScores[0]/fitnessScores[len(pop)-cLength] >= 2.0):
-				for x in range(len(pop)-cLength-3,len(pop)-cLength):
-					pop[scoreMap[fitnessScores[x]]] = pop[scoreMap[fitnessScores[0]]]
-		

@@ -1,5 +1,4 @@
 import random
-from mutation import *
 from math import *
 
 '''

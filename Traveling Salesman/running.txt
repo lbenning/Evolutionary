@@ -10,10 +10,7 @@ The simulation runs the following 6 algorithms:
 
 To run the simulation run main.py with the following 4 arguments:
 
-1. Dataset Path : Enter the filepath to the dataset file. The dataset must be a list
-of 2-dimensional points, 1 point per line with each coordinate separated by a single
-space. The points must begin on the first line of the file, and have 1 point per line
-until the end of the file. Please see example.txt for an example.
+1. Dataset Path : Enter the filepath to the dataset file. The dataset must be a list of 2-dimensional points, 1 point per line with each coordinate separated by a single space. The points must begin on the first line of the file, and have 1 point per line until the end of the file. Please see example.txt for an example.
 
 2. Number of simulations per algorithms - Due to the stochastic nature of genetic 
 algorithms and the parametric optimizers, it is recommended to run the algorithms
@@ -30,10 +27,12 @@ how often to record the best path length found so far during the simulation, whi
 allows a visualization of how the algorithm's search unfolds over time. This must
 be an integer greater than one.
 
+5. Number of processes - This is the maximum number of processes that can be ran in parallel for the multiprocessing pool. Must be an integer that is at least one.
+
 The simulation will then execute, and once finished will display a graph
 which plots fitness (i.e. path length) versus evaluations for each of the different
 algorithms. If multiple simulations are run, the results are averaged for each of
-the different algorithms. Argument 3 will determine how many points are plotted per
+the different algorithms. Argument 4 will determine how many points are plotted per
 simulation (if plot is too sparse, increase this value). The plot will visually demonstrate the performance of the genetic algorithm and its variants against the stochastic hill climber and random search parametric optimizers.
 
 As an example, try to run the simulation on the provided dataset as follows:

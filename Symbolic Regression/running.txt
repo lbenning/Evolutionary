@@ -1,0 +1,38 @@
+Genetic Programming simulation that attempts to evolve an equation of a single
+variable f(x) to fit a set of 2-dimensional points.
+
+The simulation runs both a genetic program as well as a random search for
+benchmarking. To run the simulation run main.py with the following 5 arguments:
+
+1. Dataset Path : Enter the filepath to the dataset file. The dataset must be a list of 2-dimensional points, 1 point per line with each coordinate separated by a single space. The points must begin on the first line of the file, and have 1 point per line until the end of the file. Please see example.txt for an example.
+
+2. Number of simulations per algorithms - Due to the stochastic nature of genetic
+programs and the random search, it is recommended to run the algorithms
+multiple times in order to get good results. This argument must be an integer greater
+than 0, and will specify how many times to run each algorithm.
+
+3. Number of evaluations per simulation - Must be an integer greater than zero,
+preferably much greater than zero in order to increase the likelihood of convergence
+towards the true function. This is the number of times the fitness function may be
+evaluated for each algorithm simulation.
+
+4. Number of times to record path length per simulation - This parameter determines
+how often to record the best path length found so far during the simulation, which
+allows a visualization of how the algorithm's search unfolds over time. This must
+be an integer greater than one.
+
+5. Number of processes - This is the maximum number of processes that can be ran in parallel for the multiprocessing pool. Must be an integer that is at least one.
+
+The simulation will then execute, and once finished will print the function
+with the smallest Mean-Squared Error (MSE) to the terminal. It will also display a graph which plots fitness (i.e. 1/MSE) versus evaluations for both of the
+algorithms. If multiple simulations are run, the results are averaged for each of
+the different algorithms. Argument 4 will determine how many points are plotted per
+simulation (if plot is too sparse, increase this value). The plot will visually demonstrate the performance of the genetic program against the random search, and
+likely indicate the superiority of the genetic program to the random search.
+
+As an example, try to run the simulation on the provided dataset as follows:
+
+python main.py example.txt 3 5000 10 10
+
+This will run the genetic program and random search on the provided dataset. Each algorithm will be run three different times, for 5000 fitness function
+evaluations per run. The fitness will be recorded 10 different times per simulation, uniformly spread out over the number of fitness evaluations. Finally, the maximum number of processes is 10.
