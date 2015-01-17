@@ -8,7 +8,7 @@ Evolutionary algorithms applied to various types of problems.
 
 3. Traveling Salesman - Simulation to discover the minimum cost Hamiltonian cycle on a set of 2d points. Runs 2 different genetic algorithms, a stochastic hill climbing search and a random search in an attempt to discover the optimal solution.
 
-4. Symbolic Regression - Genetic program that evolves syntax trees representing mathematical formulas to fit a dataset of 2d points. Capable of learning functions involving binary operators (+,-,/,*) as well as unary operators (sin,cos,tan,sqrt).Runs a genetic program as well as a random search in an attempt to find the true function (if it exists, otherwise approximate).
+4. Symbolic Regression - Genetic program that evolves syntax trees representing mathematical formulas to fit a dataset of 2d points. Capable of learning functions involving binary operators (+,-,/,*) as well as unary operators (sin,cos,tan,sqrt). Runs a genetic program as well as a random search in an attempt to find the true function (if it exists, otherwise approximate).
 
 ## Running:
 
